@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Randy Johnson – Business Professional</title>
+  <link rel="icon" href="profilepic.jpg" type="image/jpeg">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0066cc;
+      --secondary: #2d3748;
+      --accent: #4299e1;
+      --light: #f7fafc;
+      --dark: #1a202c;
+      --gray: #718096;
+      --success: #38a169;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      line-height:1.7; color:var(--secondary);
+      background:#f8f9fa; scroll-behavior:smooth;
+    }
+    a { color:var(--accent); text-decoration:none; transition:.3s; }
+    a:hover { color:var(--primary); }
+    .container { max-width:1200px; margin:0 auto; padding:0 1.5rem; }
+
+    /* HEADER */
+    .header {
+      background:linear-gradient(135deg, var(--primary) 0%, #003366 100%);
+      color:white; padding:5rem 0 2rem;
+      text-align:center; position:relative; overflow:hidden;
+    }
+    .header::after {
+      content:''; position:absolute; bottom:-5px; left:0;
+      width:100%; height:10px;
+      background:linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+    }
+    .profile-pic {
+      width:160px; height:160px; border-radius:50%;
+      object-fit:cover; border:4px solid rgba(255,255,255,0.3);
+      box-shadow:0 10px 25px rgba(0,0,0,0.1);
+      margin:0 auto 1rem; display:block;
+    }
+    .header h1 {
+      font-size:3rem; margin-bottom:.5rem; font-weight:700;
+      letter-spacing:.5px; animation:fadeInUp .5s ease-out forwards;
+    }
+    .header p {
+      font-size:1.1rem; font-weight:300; max-width:600px;
+      margin:0.5rem auto 1.5rem; animation:fadeInUp .5s ease-out .2s forwards;
+    }
+    .social-links {
+      display:flex; justify-content:center; gap:1rem;
+      opacity:0; animation:fadeInUp .5s ease-out .4s forwards;
+    }
+    .social-link {
+      width:40px; height:40px; border-radius:50%;
+      background:rgba(255,255,255,0.1); color:white;
+      display:flex; align-items:center; justify-content:center;
+      transition:.3s;
+    }
+    .social-link:hover { background:rgba(255,255,255,0.2); transform:translateY(-3px); }
+
+    /* NAV */
+    .navbar {
+      background:#fff; box-shadow:0 2px 15px rgba(0,0,0,0.1);
+      position:sticky; top:0; z-index:1000;
+    }
+    .nav-links { display:flex; justify-content:center; list-style:none; }
+    .nav-link {
+      padding:1rem 1.5rem; color:var(--secondary); text-transform:uppercase;
+      font-weight:500; font-size:.85rem; position:relative;
+    }
+    .nav-link::after {
+      content:''; position:absolute; bottom:0; left:50%; width:0;
+      height:3px; background:var(--primary); transition:.3s;
+      transform:translateX(-50%);
+    }
+    .nav-link:hover::after, .nav-link.active::after { width:100%; }
+    .nav-link:hover, .nav-link.active { color:var(--primary); }
+
+    /* SECTIONS */
+    .main-content { padding:3rem 0; }
+    .section {
+      background:#fff; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.05);
+      padding:2rem; margin-bottom:3rem;
+      opacity:0; transform:translateY(20px);
+      animation:fadeInUp .5s ease-out forwards;
+    }
+    .section:nth-of-type(2) { animation-delay:.1s; }
+    .section:nth-of-type(3) { animation-delay:.2s; }
+    .section:nth-of-type(4) { animation-delay:.3s; }
+    .section:nth-of-type(5) { animation-delay:.4s; }
+    .section-header { margin-bottom:1.5rem; position:relative; padding-bottom:.5rem; }
+    .section-header h2 {
+      font-size:1.8rem; color:var(--primary); font-weight:600;
+    }
+    .section-header::after {
+      content:''; position:absolute; bottom:0; left:0;
+      width:50px; height:3px; background:var(--primary);
+    }
+    .about-content p { margin-bottom:1rem; }
+
+    /* TIMELINE */
+    .timeline { position:relative; padding-left:20px; }
+    .timeline::before {
+      content:''; position:absolute; top:0; left:20px; width:2px; height:100%;
+      background:#e2e8f0;
+    }
+    .timeline-item { position:relative; margin-bottom:2rem; padding-left:40px; }
+    .timeline-marker {
+      position:absolute; top:0; left:10px; width:20px; height:20px;
+      border-radius:50%; background:var(--primary); border:3px solid #fff;
+    }
+    .timeline-content {
+      background:#f8f9fa; padding:1rem; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.05);
+    }
+    .timeline-date {
+      display:inline-block; padding:.25rem .75rem; background:var(--primary);
+      color:#fff; border-radius:20px; font-size:.8rem; margin-bottom:.5rem;
+    }
+    /* GRID LAYOUTS */
+    .skills-container, .portfolio-grid, .contact-grid {
+      display:grid; gap:2rem;
+    }
+    .skills-container { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+    .portfolio-grid { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+    .contact-grid { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); }
+    .skill-category, .portfolio-item, .section { transition:.3s; }
+    .skill-category:hover, .portfolio-item:hover { transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,0.1); }
+    .skill-list, .portfolio-desc ul { list-style:none; margin-top:.5rem; }
+    .skill-item::before {
+      content:"\f00c"; font-family:"Font Awesome 6 Free"; font-weight:900;
+      margin-right:.5rem; color:var(--success);
+    }
+    .portfolio-link i { margin-left:.25rem; transition:.3s; }
+    .portfolio-link:hover i { transform:translateX(3px); }
+
+    /* CONTACT */
+    .contact-item { text-align:center; }
+    .contact-icon {
+      width:60px; height:60px; margin:0 auto .5rem;
+      display:flex; align-items:center; justify-content:center;
+      border-radius:50%; background:var(--primary); color:#fff; font-size:1.5rem;
+    }
+
+    /* FOOTER */
+    .footer { background:var(--dark); color:#fff; padding:2rem 0; text-align:center; }
+    .footer-link { color:#a0aec0; margin:0 .5rem; transition:.3s; }
+    .footer-link:hover { color:#fff; }
+    .copyright { font-size:.8rem; color:var(--gray); margin-top:1rem; }
+
+    /* ANIMATION */
+    @keyframes fadeInUp {
+      to { opacity:1; transform:translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER + PIC + NAME + TAGLINE -->
+  <header class="header" id="home">
+    <img src="profilepic.jpg" alt="Randy Johnson" class="profile-pic">
+    <h1>Randy Johnson</h1>
+    <p>Business Professional with expertise in marketing, technology, and customer service</p>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/randy-johnson-1725a869" target="_blank" class="social-link">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="mailto:randy_johnson138@mymail.eku.edu" class="social-link">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <ul class="nav-links container">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#experience" class="nav-link">Experience</a></li>
+      <li><a href="#education" class="nav-link">Education</a></li>
+      <li><a href="#skills" class="nav-link">Skills</a></li>
+      <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content container">
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="section-header"><h2>About Me</h2></div>
+      <div class="about-content">
+        <p>I'm Randy Johnson, holding a Bachelor's degree in Business Administration from Eastern Kentucky University. With years of experience, a sharp eye for detail, and a knack for problem-solving, I craft solutions tailored to your business. Let me turn your vision into reality!</p>
+        <p>I aim to establish a career as a dedicated and effective business professional.</p>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <div class="section-header"><h2>Work Experience</h2></div>
+      <div class="timeline">
+        <!-- Repeat for each role -->
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">2024</span>
+            <h3>Construction Worker – White Enterprises 316, LLC</h3>
+            <ul>
+              <li>Customer service</li>
+              <li>Installing floors</li>
+              <li>Painting interiors</li>
+              <li>Pressure washing homes</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">2024</span>
+            <h3>Customer Service Rep – Family Dollar</h3>
+            <ul>
+              <li>Assisting customers</li>
+              <li>Cash register transactions</li>
+              <li>Greeting customers</li>
+              <li>Stocking merchandise</li>
+            </ul>
+          </div>
+        </div>
+        <!-- …other items… -->
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="section">
+      <div class="section-header"><h2>Education</h2></div>
+      <div class="education-item">
+        <h3>Bachelor of Business Administration</h3>
+        <span class="timeline-date">May 2013</span>
+        <p><strong>Eastern Kentucky University</strong> (AACSB Accredited)</p>
+        <ul>
+          <li>Human Resource Management</li>
+          <li>Operations Management</li>
+          <li>Business Communications</li>
+          <li>Marketing</li>
+          <li>Entrepreneurship</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <div class="section-header"><h2>Skills</h2></div>
+      <div class="skills-container">
+        <div class="skill-category">
+          <h3>Core Competencies</h3>
+          <ul>
+            <li class="skill-item">Critical thinking & problem solving</li>
+            <li class="skill-item">Adaptability</li>
+            <li class="skill-item">Communication</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3>Business & Marketing</h3>
+          <ul>
+            <li class="skill-item">Business Plan Writing</li>
+            <li class="skill-item">Logo & Brand Design</li>
+            <li class="skill-item">Marketing Campaigns</li>
+            <li class="skill-item">Website Design</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3>Technology</h3>
+          <ul>
+            <li class="skill-item">PC repair & troubleshooting</li>
+            <li class="skill-item">Windows OS installation</li>
+            <li class="skill-item">AI: ChatGPT prompt engineering</li>
+            <li class="skill-item">Microsoft 365 & cloud tools</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="section">
+      <div class="section-header"><h2>Portfolio & Work Samples</h2></div>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <h3>Business Solutions Services</h3>
+          <p>I specialize in bringing business ideas to life with precision and creativity.</p>
+        </div>
+        <div class="portfolio-item">
+          <h3>Promo Video & Logo</h3>
+          <p>Check out a promotional video and logo I created for White Enterprises LLC.</p>
+        </div>
+        <!-- …etc… -->
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="section-header"><h2>Contact</h2></div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-phone"></i></div>
+          <p>(859) 396-1313</p>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <p><a href="mailto:randy_johnson138@mymail.eku.edu">randy_johnson138@mymail.eku.edu</a></p>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fab fa-linkedin-in"></i></div>
+          <p><a href="https://www.linkedin.com/in/randy-johnson-1725a869" target="_blank">linkedin.com/in/randy-johnson-1725a869</a></p>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <p>Lexington, KY 40508</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>Thank you for visiting my professional portfolio</p>
+      <div class="footer-links">
+        <a href="#home" class="footer-link"><i class="fas fa-chevron-up"></i></a>
+        <a href="https://www.linkedin.com/in/randy-johnson-1725a869" class="footer-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:randy_johnson138@mymail.eku.edu" class="footer-link"><i class="fas fa-envelope"></i></a>
+      </div>
+      <p class="copyright">&copy; 2025 Randy Johnson. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // highlight nav on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          document.querySelector(`.nav-link[href="#${e.target.id}"]`).classList.add('active');
+        }
+      });
+    }, { threshold: 0.6 });
+    sections.forEach(s => observer.observe(s));
+
+    // smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior:'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

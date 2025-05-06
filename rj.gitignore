@@ -1,0 +1,22 @@
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
+.env
+
+# Node dependencies (if you ever use npm/yarn)
+node_modules/
+
+# Build output (static site generators)
+_build/
+public/
+
+# IDE/editor settings
+.vscode/
+.idea/
